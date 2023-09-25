@@ -17,7 +17,7 @@ public class Lesson03Quiz01RestController {
 	@Autowired
 	private RealEstateBO realEstateBO;
 	
-	// url : http://localhost:8080/lesson03/quiz01?id={}
+	// url : http://localhost:8080/lesson03/quiz01/1?id={}
 	@RequestMapping("/1")
 	public RealEstate quiz01(
 			@RequestParam("id") int id) {
@@ -30,11 +30,12 @@ public class Lesson03Quiz01RestController {
 //		return realEstateBO.getRealEstateList(param);
 //	}
 	
+	// url : http://localhost:8080/lesson03/quiz01/3?area=90&price=130000
 	@RequestMapping("/3")
 	public List<RealEstate> quiz01_3(
 			@RequestParam("area") int area,
 			@RequestParam("price") int price) {
-		return realEstateBO.getRealEstateList(area, price);
+		return realEstateBO.getRealEstateListByAreaPrice(area, price); // response body => JSON(List)
 	}
 	
 }

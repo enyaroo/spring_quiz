@@ -21,7 +21,7 @@
 			`id` = #{id}
 	</select>
 
-	<select id="selectRealEstateList" parameterType="map"
+	<select id="selectRealEstateListByAreaPrice" parameterType="map"
 		resultType="com.quiz.lesson03.quiz01.domain.RealEstate">
 		SELECT
 			`id`
@@ -36,11 +36,84 @@
 		FROM
 			`real_estate`
 		WHERE
-			`area` <![CDATA[>=]]> #{area}
+		<![CDATA[
+			`type` = '매매'
 		AND
-			`price` <![CDATA[<=]]> #{price}
+			`area` >= #{area}
+		AND
+			`price` <= #{price}
+		]]>
 		ORDER BY
-			`updatedAt`
+			`id` <!-- 인덱스 번호 역할을 하는 데이터이므로 createdAt보다 정확한 업데이트 기준이 됨 -->
 		DESC
 	</select>
+	
+	<insert id="insertRealEstate" parameterType="com.quiz.lesson03.quiz01.domain.RealEstate">
+		INSERT INTO
+			`real_estate`
+		(	
+			`realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<insert id="insertRealEstateAsField" parameterType="map">
+		INSERT INTO
+			`real_estate`
+		(	
+			`realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<update id="updateRealEstateById" parameterType="map">
+		UPDATE
+			`real_estate`
+		SET
+			`type` = #{type}
+			, `price` = #{price}
+		WHERE
+			`id` = #{id}
+	</update>
+	
+	<delete id="deleteRealEstateById" parameterType="int">
+		DELETE FROM
+			`real_estate`
+		WHERE
+			`id` = #{id}
+	</delete>
 </mapper>
