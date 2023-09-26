@@ -106,6 +106,7 @@
 		SET
 			`type` = #{type}
 			, `price` = #{price}
+			, `updatedAt` = NOW()
 		WHERE
 			`id` = #{id}
 	</update>
