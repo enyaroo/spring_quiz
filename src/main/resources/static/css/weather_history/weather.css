@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
-.main {height:200px}
-.upper {height:400px}
-footer {height:200px}
+#wrap {width:1200px;}
+nav {background-color:cornflowerblue;}
+.contents {min-height:600px;}
+footer {height:100px;}
+.input-label {width:130px; text-align:right; margin-right:10px;}
+.menu-font {color:white; font-size:17px; font-weight:bold;}
+.menu-font:hover {color:white; border:2px solid whilte;}

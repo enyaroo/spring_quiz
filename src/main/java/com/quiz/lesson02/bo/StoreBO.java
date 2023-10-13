@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.quiz.lesson02.domain.Store;
 import com.quiz.lesson02.mapper.StoreMapper;
+import com.quiz.review.domain.Review;
 
 @Service
 public class StoreBO {
@@ -16,5 +17,9 @@ public class StoreBO {
 	
 	public List<Store> getStoreList() {
 		return storeMapper.selectStoreList();
+	}
+	
+	public List<Review> getReviewByStoreIdList(int storeId, String storeName) {
+		return storeMapper.selectReviewByStoreIdList(storeId, storeName);
 	}
 }

@@ -4,22 +4,29 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<!-- jquery 원본 : bootstrap, datepicker -->
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		
 		<!-- Bootstrap 4.6 -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+		
+		<!-- datepicker -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+		
 		<!-- CSS -->
 		<link rel="stylesheet" href="/css/weather_history/weather.css">
 		
 		<title>날씨 입력</title>
 	</head>
 	<body>
-		<div class="main container bg-secondary">
-			<div class="upper bg-warning d-flex">
-				<nav class="bg-primary col-2"></nav>
-				<div class="bg-danger col-10">
+		<div class="main container">
+			<div class="upper d-flex">
+				<nav class="col-2"></nav>
+				<div class="col-10">
 					<h1>날씨 입력</h1>
-					<form method="post" action="/lesson05/weather-history/add">
+					<form method="post" action="/weather/add-weather">
 						<div class="form-group d-flex">
 							<label for="date">날짜</label>
 							<input type="text" id="date" name="date" class="form-control col-3">
@@ -58,7 +65,16 @@
 					</form>
 				</div>
 			</div>
-			<footer class="bg-success"></footer>
+			<footer></footer>
 		</div>
+		
+		<script>
+			// ready : DOM tree 가 완성된 후 불려지는 함수
+			$(document).ready(function() {
+				$("#date").datepicker({
+					dateFormat:"yy-mm-dd" // 날짜 포맷
+				});
+			});
+		</script>
 	</body>
 </html>
