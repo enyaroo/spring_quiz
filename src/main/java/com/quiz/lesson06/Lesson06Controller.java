@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class Lesson06Controller {
 	
 	// 즐겨찾기 추가 로직 - AJAX 요청
 	@PostMapping("/quiz01/add-bookmark")
+	@ResponseBody
 	public Map<String, Object> addBookmark(
 			@RequestParam("name") String name
 			, @RequestParam("url") String url
@@ -54,18 +56,33 @@ public class Lesson06Controller {
 		return "lesson06/getBookmark";
 	}
 	
-	@GetMapping("/quiz01/is-duplication")
+	@PostMapping("/quiz01/is-duplication")
 	@ResponseBody
 	public Map<String, Object> isDuplication(
 			@RequestParam("url") String url) {
-		bookmarkBO
 		
+		// DB 조회
+		Bookmark bookmark = bookmarkBO.getBookmarkByUrl(url);
+		
+		// 응답값
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("is_duplication", false);
+		if (bookmark != null) {
+			result.put("is_duplication", true);
+		}
 		return result;
 	}
 	
-//	@GetMapping("/quiz01/delete-bookmark")
-//	public void deleteBookmarkById(
-//			@RequestParam("id") int id) {
-//		bookmarkBO.deleteBookmarkById(id);
-//	}
+	// bookmark 삭제 기능 - AJAX 호출
+	@DeleteMapping("/quiz01/delete-bookmark")
+	@ResponseBody
+	public Map<String, Object> deleteBookmarkById(
+			@RequestParam("id") int id) {
+		bookmarkBO.deleteBookmarkById(id);
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		return result;
+	}
 }

@@ -27,28 +27,46 @@
 					<input type="text" id="url" class="form-control">
 					<button type="button" class="btn btn-info" id="urlCheckBtn">중복 확인</button>
 				</div>
-				<small id="urlStatusArea"></small>
+				<small id="duplicatedText" class="text-danger d-none">중복된 url입니다.</small>
+				<small id="availableText" class="text-success d-none">저장 가능한 url입니다.</small>
 			</div>
 			<input id="addBtn" type="button" class="btn btn-success btn-block" value="추가">
 		</div>
 	<script>
 		$(document).ready(function() {
+			// 중복 확인 버튼 클릭 (quiz02)
 			$('#urlCheckBtn').on('click', function () {
-				$('#urlStatusArea').empty();
 				let url = $('#url').val().trim();
+				if (!url) {
+					alert("검사할 url을 입력하세요.");
+					return;
+				}
 				
+				// DB에서 URL 중복 확인
 				$.ajax({
-					type:"GET"
+					// request
+					type:"POST" // url이 길 수도 있어서 GET x
 					, url:"/lesson06/quiz01/is-duplication"
 					, data:{"url":url}
-					, success:function(data) {
-						if (data.) {
-							$('#urlStatusArea').append('<span class="text-danger">중복된 주소입니다.</span>')
+				
+					// response
+					, success:function(data) { // data JSON=>dictionary
+						// {"code":200, "is-duplication":true}
+						if (data.is_duplication) {
+							$('#duplicatedText').removeClass('d-none');
+							$('#availableText').addClass('d-none');
+						} else {
+							$('#duplicatedText').addClass('d-none');
+							$('#availableText').removeClass('d-none');
 						}
+					}
+					, error:function(request, status, error) {
+						alert('중복 확인에 실패했습니다.');
 					}
 				});
 			});
 			
+			// 추가 버튼 클릭
 			$('#addBtn').on('click', function() {
 				let name = $('#name').val().trim();
 				let url = $('#url').val().trim();
@@ -70,6 +88,11 @@
 					return;
 				}
 				
+				if ($('#availableText').hasClass('d-none')) {
+					alert("URL 중복 확인을 다시 해주세요.");
+					return;
+				}
+				
 				$.ajax({
 					type:"POST"
 					, url:"/lesson06/quiz01/add-bookmark"
@@ -79,7 +102,7 @@
 						// jquery의 ajax 함수의 기능
 						
 						if (data.result == "success") {
-							location.href = "/lesson06/quiz01/get-bookmark-list"
+							location.href = "/lesson06/quiz01/get-bookmark-list";
 						}
 					}
 					, error:function(request, status, error) {
@@ -88,8 +111,7 @@
 						alert(status);
 						alert(error); */
 					}
-					
-				})
+				});
 			});
 		});	
 	</script>

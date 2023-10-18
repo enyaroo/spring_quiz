@@ -26,7 +26,10 @@ public class BookmarkBO {
 		bookmarkMapper.deleteBookmarkById(id);
 	}
 	
-	public boolean existUrlByUrl(String url) {
-		
+	// input : url
+	// output : Bookmark (단건이거나 null)
+	// Too many result 에러=> 단건으로 리턴하지만 결과는 List로 나왔을 때
+	public Bookmark getBookmarkByUrl(String url) {
+		return bookmarkMapper.selectBookmarkByUrl(url);
 	}
 }

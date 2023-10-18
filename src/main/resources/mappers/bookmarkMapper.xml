@@ -28,8 +28,17 @@
 		FROM
 			`site`
 	</select>
-	<select id="existUrlByUrl" resultType="boolean">
-	
+	<select id="selectBookmarkByUrl" resultType="com.quiz.lesson06.quiz01.domain.Bookmark">
+		SELECT
+			`id`
+			, `name`
+			, `url`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`site`
+		WHERE
+			`url` = #{url}
 	</select>
 	<delete id="deleteBookmarkById" parameterType="int">
 		DELETE FROM `site`
