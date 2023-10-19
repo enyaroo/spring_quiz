@@ -1,9 +1,11 @@
 package com.quiz.logpension.bo;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.logpension.domain.Booking;
 import com.quiz.logpension.mapper.BookingMapper;
@@ -22,4 +24,12 @@ public class BookingBO {
 		bookingMapper.deleteBookingById(id);
 	}
 	
+	public void addBooking(String name, String date, int day
+			, int headcount, String phoneNumber) {
+		bookingMapper.insertBooking(name, date, day, headcount, phoneNumber);
+	}
+	
+	public Booking checkBookingByNamePhonNumber(String name, String phoneNumber) {
+		return bookingMapper.selectBookingByNamePhonNumber(name, phoneNumber);
+	}
 }
