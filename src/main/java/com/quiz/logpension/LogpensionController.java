@@ -71,14 +71,23 @@ public class LogpensionController {
 	
 	// 예약확인 ajax
 	@PostMapping("/check-booking")
-	@ResponseBody
+	@ResponseBody // Model 사용 불가(view로 가지 않기 때문, jsp로 return할때만 사용)
 	public Map<String, Object> checkBookingByNamePhonNumber(
 			@RequestParam("name") String name
 			, @RequestParam("phoneNumber") String phoneNumber) {
 		Booking booking = bookingBO.checkBookingByNamePhonNumber(name, phoneNumber);
+		// 응답값
+		// {"code":400, "error_msg":"데이터가 존재하지 않습니다."}
+		// {"code":200, "result":{"id":1, "name":...}}
 		Map<String, Object> result = new HashMap<>();
-		result.put("bookingExist", booking);
-		result.put("result", "success");
+		if (booking == null) {
+			result.put("code", 400);
+			result.put("error_message", "데이터가 존재하지 않습니다.");
+		} else {
+			result.put("code", 200);
+			result.put("result", booking);
+			
+		}
 		return result;
 	}
 }

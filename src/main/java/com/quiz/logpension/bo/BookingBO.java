@@ -29,7 +29,17 @@ public class BookingBO {
 		bookingMapper.insertBooking(name, date, day, headcount, phoneNumber);
 	}
 	
+	// input : name, phoneNumber
+	// output : Booking (null or Booking)
 	public Booking checkBookingByNamePhonNumber(String name, String phoneNumber) {
-		return bookingMapper.selectBookingByNamePhonNumber(name, phoneNumber);
+		List<Booking> bookingList = bookingMapper.selectBookingByNamePhonNumber(name, phoneNumber);
+		// 0 1 (최신)
+		// 리스트가 비어있다면 아예 null이 아닌 [](empty list)로 되어있음 << MyBatis 특
+		if (bookingList.isEmpty()) {
+			return null; // 빈 리스트일때 null return
+		}
+		
+		// 리스트가 비어있지 않으면 마지막 객체를 리턴
+		return bookingList.get(bookingList.size() - 1); // 리스트에 뭐가 있다면 최신 Booking 객체 return
 	}
 }

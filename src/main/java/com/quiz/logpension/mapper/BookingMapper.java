@@ -20,6 +20,6 @@ public interface BookingMapper {
 			, @Param("headcount") int headcount
 			, @Param("phoneNumber") String phoneNumber);
 	
-	public Booking selectBookingByNamePhonNumber(@Param("name") String name
+	public List<Booking> selectBookingByNamePhonNumber(@Param("name") String name
 			, @Param("phoneNumber") String phoneNumber);
 }

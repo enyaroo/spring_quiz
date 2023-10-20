@@ -5,6 +5,7 @@ header {height:100px;}
 nav {height:40px; background-color:#E3871F;}
 .contents {min-height:500px;}
 
+.title > a {color:black; text-decoration:none;}
 .nav-item .nav-link:hover {background-color:#A76417;}
 .contents .reservation-box {width:450px;}
 .reserve {height:250px;}

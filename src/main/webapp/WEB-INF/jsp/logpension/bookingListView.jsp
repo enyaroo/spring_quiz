@@ -30,7 +30,9 @@
 		<body>
 			<div id="wrap" class="container">
 				<header class="d-flex justify-content-center align-items-center">
-					<div class="display-4">통나무 펜션</div>
+					<div class="title display-4">
+						<a href="/lesson06/logpension/main">통나무 펜션</a>
+					</div>
 				</header>
 				<nav>
 					<ul class="nav nav-fill">

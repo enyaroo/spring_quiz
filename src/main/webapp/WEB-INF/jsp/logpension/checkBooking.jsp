@@ -27,7 +27,9 @@
 		<body>
 			<div id="wrap" class="container">
 				<header class="d-flex justify-content-center align-items-center">
-					<div class="display-4">통나무 펜션</div>
+					<div class="title display-4">
+						<a href="/lesson06/logpension/main">통나무 펜션</a>
+					</div>
 				</header>
 				<nav>
 					<ul class="nav nav-fill">
@@ -101,16 +103,16 @@
 							, data:{"name":name
 								, "phoneNumber":phoneNumber}
 							, success:function(data) {
-								if (data.result == "success") {
-									let text = "이름 : " + data.bookingExist.name + "\n"
-												+ "날짜 : " + data.bookingExist.date + "\n"
-												+ "일수 : " + data.bookingExist.day + "\n"
-												+ "인원 : " + data.bookingExist.headcount + "\n"
-												+ "상태 : " + data.bookingExist.state
+								if (data.code == 200) {
+									let text = "이름 : " + data.result.name + "\n"
+												+ "날짜 : " + data.result.date.substring(0, 10) + "\n"
+												+ "일수 : " + data.result.day + "\n"
+												+ "인원 : " + data.result.headcount + "\n"
+												+ "상태 : " + data.result.state
 									alert(text);
 									location.reload();
-								} else {
-									alert("예약 조회 실패");
+								} else if (data.code == 400){
+									alert(data.error_message);
 								}
 							}
 							, error:function(request, status, error) {
