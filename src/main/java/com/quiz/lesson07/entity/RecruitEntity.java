@@ -1,6 +1,7 @@
 package com.quiz.lesson07.entity;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,16 +23,22 @@ import lombok.ToString;
 @Getter
 @Builder(toBuilder=true)
 @Entity
-@Table(name="company")
-public class CompanyEntity {
+@Table(name="recruit")
+public class RecruitEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	private String name;
-	private String business;
-	private String scale;
-	private int headcount;
+	@Column(name="companyId")
+	private int companyId;
+	
+	private String position;
+	private String responsibilities;
+	private String qualification;
+	private String type;
+	private String region;
+	private int salary;
+	private Date deadline;
 	
 	@UpdateTimestamp
 	@Column(name="createdAt", updatable=false)

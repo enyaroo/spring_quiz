@@ -30,11 +30,23 @@ public class Lesson07RestController {
 	
 	@GetMapping("/save2")
 	public CompanyEntity save2() {
-		String name = "버블팡";
-		String business = "여신 금융업";
-		String scale = "대기업";
-		int headcount = 6834;
-		return companyBO.save(name, business, scale, headcount);
+		return companyBO.save("버블팡", "여신 금융업", "대기업", 6834);
+	}
+	
+	@GetMapping("/save3")
+	public CompanyEntity save3() {
+		return companyBO.save("유튜브", "동영상 공유 플랫폼", "대기업", 12880);
+	}
+	
+	@GetMapping("/update")
+	public CompanyEntity update() {
+		return companyBO.updateCompanyScaleHeadcountById(8, "중소기업", 34);
+	}
+	
+	@GetMapping("/delete")
+	public String delete() {
+		companyBO.deleteCompanyById(8);
+		return "수행 완료";
 	}
 	
 }

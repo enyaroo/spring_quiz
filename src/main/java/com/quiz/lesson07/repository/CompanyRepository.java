@@ -7,5 +7,6 @@ import com.quiz.lesson07.entity.CompanyEntity;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<CompanyEntity, Integer>{
-
+	// JpaRepository : Spring Data JPA
+	// save(Entity 객체)
 }
