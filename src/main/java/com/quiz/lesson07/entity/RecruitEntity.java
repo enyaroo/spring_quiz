@@ -1,7 +1,7 @@
 package com.quiz.lesson07.entity;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.Date;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,7 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Builder(toBuilder=true)
-@Entity
+@Entity(name="recruit")
 @Table(name="recruit")
 public class RecruitEntity {
 	@Id
@@ -38,7 +38,7 @@ public class RecruitEntity {
 	private String type;
 	private String region;
 	private int salary;
-	private Date deadline;
+	private LocalDate deadline;
 	
 	@UpdateTimestamp
 	@Column(name="createdAt", updatable=false)
